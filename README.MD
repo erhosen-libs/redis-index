@@ -3,7 +3,7 @@
 Suppose you have a task of implementing a service that will fetch data for a given set of filters.
 
 ```
-GET /api/companies?region="US"&currency="USD"&search_ids=233,816,266,...
+GET /api/companies?region=US&currency=USD&search_ids=233,816,266,...
 ```
 
 Filters may require a significant costs for the database: each of them involves joining multiple tables. By writing a solution on raw SQL, we have a risk of stumbling into database performance.
@@ -68,7 +68,7 @@ Simply call `filter()` method with specific filters, and your `search_ids`
 
 ```
 company_ids = request.GET["company_ids"]  # input list
-result = filtering.filter(search_ids, [RegionFilter("US"), c("USD")])
+result = filtering.filter(search_ids, [RegionFilter("US"), CurrencyFilter("USD")])
 ```
 
 The result will be a list, that contains only ids, that are both satisfying RegionFilter and RegionFilter
