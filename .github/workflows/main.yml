@@ -4,25 +4,21 @@ jobs:
   run:
     name: Run
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
-
-  steps:
-    - uses: actions/checkout@master
-    - name: Set up Python
-      uses: actions/setup-python@v1
-      with:
-        python-version: '3.8'
-    - name: Install Poetry
-      run: |
-        python get-poetry.py --preview -y
-        source $HOME/.poetry/env
-    - name: Install depend  encies
-      run: |
-        source $HOME/.poetry/env
-        poetry install
-    - name: Test
-      run: |
-        source $HOME/.poetry/env
-        poetry run pytest -q tests
+    steps:
+      - uses: actions/checkout@master
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.8'
+      - name: Install Poetry
+        run: |
+          python get-poetry.py --preview -y
+          source $HOME/.poetry/env
+      - name: Install depend  encies
+        run: |
+          source $HOME/.poetry/env
+          poetry install
+      - name: Test
+        run: |
+          source $HOME/.poetry/env
+          poetry run pytest -q tests
