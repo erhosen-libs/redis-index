@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [2.7, 3.5, 3.6, 3.7]
+        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
 
   steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@master
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -18,7 +18,7 @@ jobs:
       run: |
         python get-poetry.py --preview -y
         source $HOME/.poetry/env
-    - name: Install dependencies
+    - name: Install depend  encies
       run: |
         source $HOME/.poetry/env
         poetry install
