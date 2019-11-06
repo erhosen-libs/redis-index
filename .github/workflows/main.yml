@@ -1,24 +1,17 @@
-name: Main workflow
-on: [push]
+name: Run Tests
+on: push
+
 jobs:
-  run:
-    name: Run
+  pytest:
+    name: pytest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Set up Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.8'
-      - name: Install Poetry
-        run: |
-          python get-poetry.py --preview -y
-          source $HOME/.poetry/env
-      - name: Install depend  encies
-        run: |
-          source $HOME/.poetry/env
-          poetry install
-      - name: Test
-        run: |
-          source $HOME/.poetry/env
-          poetry run pytest -q tests
+    - uses: actions/checkout@master
+    - name: Install
+      uses: abatilo/actions-poetry@latest
+      with:
+        args: install
+    - name: Run pytest
+      uses: abatilo/actions-poetry@latest
+      with:
+        args: run python -m pytest --cov=redis_index --cov-branch --cov-fail-under=100 tests/
