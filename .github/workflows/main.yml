@@ -8,10 +8,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Install
-      uses: abatilo/actions-poetry@latest
+      uses: abatilo/actions-poetry@v1.0.0
       with:
         args: install
     - name: Run pytest
-      uses: abatilo/actions-poetry@latest
+      uses: abatilo/actions-poetry@v1.0.0
       with:
         args: run python -m pytest --cov=redis_index --cov-branch --cov-fail-under=100 tests/
