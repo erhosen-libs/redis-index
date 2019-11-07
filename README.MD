@@ -88,7 +88,7 @@ company_ids = request.GET["company_ids"]  # input list
 result = filtering.filter(search_ids, [RegionFilter("US"), CurrencyFilter("USD")])
 ```
 
-The result will be a list, that contains only ids, that are both satisfying RegionFilter and RegionFilter
+The result will be a list, that contains only ids, that are both satisfying RegionFilter and CurrencyFilter.
 
 ## How to warm the cache?
 
