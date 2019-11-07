@@ -1,13 +1,13 @@
 # Redis-index: Inverted Index using efficient Redis set
 
-Redis-index helps to delegate part of the work from the database to the cache.
-It is useful for highload projects, with complex
+Redis-index helps to delegate part of the work from database to cache.
+It is useful for highload projects, with complex serach logic underneath the hood.
 
 ## Introduction
 
 Suppose you have to implement a service that will fetch data for a given set of filters.
 
-```
+```http
 GET /api/companies?region=US&currency=USD&search_ids=233,816,266,...
 ```
 
@@ -16,7 +16,7 @@ Filters may require a significant costs for the database: each of them involves 
 Such "heavy" queries can be precalculated, and put into redis SET.
 We can intersect the resulting SETs with each other, thereby greatly simplifying our SQL.
 
-```
+```python
 search_ids = {233, 816, 266, ...}
 us_companies_ids = {266, 112, 643, ...}
 usd_companies_ids = {816, 54, 8395, ...}
@@ -69,7 +69,7 @@ class CurrencyFilter(BaseFilter):
 
 2) Initialize Filtering object
 
-```
+```python
 from redis_index import RedisFiltering
 from hot_redis import HotClient
 
@@ -80,13 +80,37 @@ filtering = RedisFiltering(redis_clent)
 3) Now you can use `filtering` as a singleton in your project.
 Simply call `filter()` method with specific filters, and your `search_ids`
 
-```
+```python
 company_ids = request.GET["company_ids"]  # input list
 result = filtering.filter(search_ids, [RegionFilter("US"), CurrencyFilter("USD")])
 ```
 
 The result will be a list, that contains only ids, that are both satisfying RegionFilter and RegionFilter
 
-## How to warm cache?
+## How to warm the cache?
 
-_under construction_
+You can warm up the cache in various ways, for example, using the cron command
+```crontab
+*/5  *   *   *   *   python warm_filters
+```
+
+Inside such a command, you can use specific method `warm_filters`
+
+```python
+result = filtering.filter(search_ids, [RegionFilter("US"), CurrencyFilter("USD")])
+```
+
+Or directly RedisIndex class
+```python
+for _filter in [RegionFilter("US"), CurrencyFilter("USD")]:
+    filter_index = RedisIndex(_filter, redis_client)
+    filter_index.warm()
+```
+
+## Statsd integration
+
+Redis-index optionally supports statsd-integration.
+
+![Redis-Index performance](images/redis_index_performance.png "Redis-Index performance")
+
+![Redis-Index by filters](images/redis_index_by_filters.png "Redis-Index by filters")
