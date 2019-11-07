@@ -1,7 +1,6 @@
 from unittest import mock
 
 import pytest
-
 from redis_index import BaseFilter, RedisFiltering, RedisIndex, __version__
 
 
@@ -21,12 +20,7 @@ class EmptyFiler(BaseFilter):
 
 
 @pytest.mark.parametrize(
-    'search_ids, expected',
-    [
-        ([1, 2, 3, 4, 5, 6, 7, 8, 9], [4, 5, 6]),
-        ([5, 6, 7], [5, 6]),
-        ([1, 2, 3], [])
-    ]
+    "search_ids, expected", [([1, 2, 3, 4, 5, 6, 7, 8, 9], [4, 5, 6]), ([5, 6, 7], [5, 6]), ([1, 2, 3], [])]
 )
 def test_one_filter(redis_connection, search_ids, expected):
     filtering = RedisFiltering(redis_connection)
@@ -35,12 +29,7 @@ def test_one_filter(redis_connection, search_ids, expected):
 
 
 @pytest.mark.parametrize(
-    'search_ids, expected',
-    [
-        ([1, 2, 3, 4, 5, 6, 7, 8, 9], [4, 5, 6]),
-        ([5, 6, 7], [5, 6]),
-        ([1, 2, 3], [])
-    ]
+    "search_ids, expected", [([1, 2, 3, 4, 5, 6, 7, 8, 9], [4, 5, 6]), ([5, 6, 7], [5, 6]), ([1, 2, 3], [])]
 )
 def test_multiple_filters(redis_connection, statsd_client, search_ids, expected):
     filtering = RedisFiltering(redis_connection, statsd_client)
@@ -64,7 +53,7 @@ def test_already_warmed_filter(redis_connection):
 
 
 @pytest.mark.parametrize(
-    'db_ids',
+    "db_ids",
     [
         [1, 2, 3, 4, 5, 6, 7, 8],  # remove one element
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],  # add one element
@@ -75,7 +64,7 @@ def test_warm_filters(redis_connection, statsd_client, db_ids):
     filtering = RedisFiltering(redis_connection, statsd_client)
     region_filter_us = RegionFilter("US")
     filtering.warm_filters([region_filter_us])
-    with mock.patch('redis_index.redis_index.BaseFilter.ids', new_callable=mock.PropertyMock) as _mocked_ids:
+    with mock.patch("redis_index.redis_index.BaseFilter.ids", new_callable=mock.PropertyMock) as _mocked_ids:
         _mocked_ids.return_value = db_ids
         filtering.warm_filters([region_filter_us])
 
