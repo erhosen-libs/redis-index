@@ -5,7 +5,7 @@ import inflection as inflection
 from hot_redis import HotClient, Set
 from statsd import StatsClient
 
-__all__ = ("BaseFilter", "RedisFiltering")
+__all__ = ("BaseFilter", "RedisFiltering", "RedisIndex")
 
 
 def cast_to_str(lst: t.List) -> t.Set[str]:
@@ -16,7 +16,7 @@ def cast_to_str(lst: t.List) -> t.Set[str]:
 
 
 class BaseFilter(ABC):
-    def __init__(self, arg: t.Union[str, int, bool], **kwargs):
+    def __init__(self, arg: t.Union[str, int, bool] = None, **kwargs):
         self.arg = arg  # must be immutable type to prevent problems with caching
         self.kwargs = kwargs  # helpers, that will not be part of redis key
         super().__init__()
@@ -24,15 +24,19 @@ class BaseFilter(ABC):
     @property
     def name(self) -> str:
         class_name = inflection.underscore(self.__class__.__name__)
-        return f"{class_name}_{self.arg}"
+        if self.arg:
+            return f"{class_name}_{self.arg}"
+        return class_name
 
     @property
     def ids(self) -> t.List[int]:
-        return self.get_ids(self.arg, **self.kwargs)
+        if self.arg:
+            return self.get_ids(self.arg, **self.kwargs)
+        return self.get_ids(**self.kwargs)
 
     @abstractmethod
-    def get_ids(self, arg, **kwargs) -> t.List[int]:
-        pass
+    def get_ids(self, *args, **kwargs) -> t.List[int]:
+        raise NotImplementedError
 
 
 class RedisIndex:
@@ -118,7 +122,7 @@ class RedisFiltering:
 
     def filter(self, search_ids: t.List[int], filters: t.List[BaseFilter]) -> t.List[int]:
         """
-        Filters provided search_ids with bunch of filters.
+        Intersects provided search_ids with bunch of precalculated filters.
         """
         self.send_metrics("in", filters, len(search_ids))
 
@@ -130,7 +134,7 @@ class RedisFiltering:
         for _filter in filters:
             filter_index = RedisIndex(_filter, self.redis_client, self.statsd_client)
             if not filter_index.is_warmed:
-                filter_index.warm()
+                filter_index.warm(check_consistency=False)
 
             # Fill filters list with real _filter.hot_ids `Set`
             hot_filters.append(filter_index.get_hot_ids())
@@ -142,3 +146,8 @@ class RedisFiltering:
         self.send_metrics("out", filters, len(filtered_ids))
         # Return result in appropriate format
         return list(map(int, filtered_ids))
+
+    def warm_filters(self, filters: t.List[BaseFilter]) -> None:
+        for _filter in filters:
+            filter_index = RedisIndex(_filter, self.redis_client, self.statsd_client)
+            filter_index.warm()

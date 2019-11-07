@@ -1,6 +1,11 @@
 # Redis-index: Inverted Index using efficient Redis set
 
-Suppose you have a task of implementing a service that will fetch data for a given set of filters.
+Redis-index helps to delegate part of the work from the database to the cache.
+It is useful for highload projects, with complex
+
+## Introduction
+
+Suppose you have to implement a service that will fetch data for a given set of filters.
 
 ```
 GET /api/companies?region=US&currency=USD&search_ids=233,816,266,...
@@ -25,6 +30,15 @@ But getting such precalculated SETS from Redis to Python memory could be another
 filters can be really large, and we don't want to transfer a lot of data between servers.
 
 The solution is intersect these SETs directly in redis.
+This is exactly what redis-index library does.
+
+## Installation
+
+Use `pip` to install `redis-index`.
+
+```bash
+pip install redis-index
+```
 
 ## Usage
 
@@ -53,7 +67,7 @@ class CurrencyFilter(BaseFilter):
                 return cursor.fetchall()
 ```
 
-2) Initialize Filtering class
+2) Initialize Filtering object
 
 ```
 from redis_index import RedisFiltering
@@ -72,3 +86,7 @@ result = filtering.filter(search_ids, [RegionFilter("US"), CurrencyFilter("USD")
 ```
 
 The result will be a list, that contains only ids, that are both satisfying RegionFilter and RegionFilter
+
+## How to warm cache?
+
+_under construction_
