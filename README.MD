@@ -3,7 +3,7 @@
 Redis-index helps to delegate part of the work from database to cache.
 It is useful for highload projects, with complex serach logic underneath the hood.
 
-![Tests Status](https://github.com/ErhoSen/redis-index/workflows/pytest/badge.svg)
+![Tests Status](https://github.com/ErhoSen/redis-index/workflows/Tests/badge.svg)
 
 ## Introduction
 
