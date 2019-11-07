@@ -17,7 +17,7 @@ jobs:
           pre-commit run --all-files
 
   pytest:
-    name: pytest
+    needs: lint
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master

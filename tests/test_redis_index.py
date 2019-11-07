@@ -2,24 +2,20 @@ from unittest import mock
 
 import pytest
 
-from redis_index import __version__
-from redis_index import RedisFiltering, BaseFilter, RedisIndex
+from redis_index import BaseFilter, RedisFiltering, RedisIndex, __version__
 
 
 class RegionFilter(BaseFilter):
-
     def get_ids(self, region, **kwargs):
         return [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 class CurrencyFilter(BaseFilter):
-
     def get_ids(self, currency, **kwargs):
         return [4, 5, 6]
 
 
 class EmptyFiler(BaseFilter):
-
     def get_ids(self, **kwargs):
         return []
 
@@ -73,7 +69,7 @@ def test_already_warmed_filter(redis_connection):
         [1, 2, 3, 4, 5, 6, 7, 8],  # remove one element
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],  # add one element
         [2, 3, 4, 5, 6, 7, 8, 9, 10],  # add and remove one element
-    ]
+    ],
 )
 def test_warm_filters(redis_connection, statsd_client, db_ids):
     filtering = RedisFiltering(redis_connection, statsd_client)
@@ -89,4 +85,4 @@ def test_warm_filters(redis_connection, statsd_client, db_ids):
 
 
 def test_version():
-    assert __version__ == '0.1.0'
+    assert __version__ == "0.1.0"

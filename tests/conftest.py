@@ -1,6 +1,7 @@
+from unittest import mock
+
 import fakeredis
 import pytest
-from unittest import mock
 
 
 @pytest.fixture(scope="function", autouse=True)
