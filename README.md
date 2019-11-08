@@ -6,6 +6,9 @@ It is useful for highload projects, with complex serach logic underneath the hoo
 [![Build Status](https://github.com/ErhoSen/redis-index/workflows/Build/badge.svg)](https://github.com/ErhoSen/redis-index/actions?query=workflow:Build)
 [![codecov](https://codecov.io/gh/ErhoSen/redis-index/branch/master/graph/badge.svg)](https://codecov.io/gh/ErhoSen/redis-index)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![License](https://img.shields.io/pypi/pyversions/redis-index.svg)
+![PyPI](https://img.shields.io/github/license/erhosen/redis-index.svg)
+](https://pypi.org/project/redis-index/)
 
 ## Introduction
 
@@ -118,3 +121,15 @@ Redis-index optionally supports statsd-integration.
 ![Redis-Index performance](https://github.com/ErhoSen/redis-index/raw/master/images/redis_index_performance.png "Redis-Index performance")
 
 ![Redis-Index by filters](https://github.com/ErhoSen/redis-index/raw/master/images/redis_index_by_filters.png "Redis-Index by filters")
+
+## Code of Conduct
+
+Everyone interacting in the project's codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [PyPA Code of Conduct](https://www.pypa.io/en/latest/code-of-conduct/).
+
+## History
+
+### [0.1.0] - 2019-11-08
+
+#### Added
+
+- Added code for initial release

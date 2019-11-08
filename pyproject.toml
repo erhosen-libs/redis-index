@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "redis-index"
-version = "0.1.2"
+version = "0.1.3"
 description = "Inverted Index using efficient Redis set"
 authors = ["Vladimir Vyazovetskov <erhosen@gmail.com>"]
 license = "MIT"
