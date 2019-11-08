@@ -36,9 +36,8 @@ jobs:
         pip install poetry
         poetry install
     - name: Run pytest
-      uses: abatilo/actions-poetry@v1.0.0
-      with:
-        args: run python -m pytest --cov=redis_index --cov-report=xml tests/
+      run: |
+        run python -m pytest --cov=redis_index --cov-report=xml tests/
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1.0.3
       with:
