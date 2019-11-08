@@ -7,8 +7,7 @@ It is useful for highload projects, with complex serach logic underneath the hoo
 [![codecov](https://codecov.io/gh/ErhoSen/redis-index/branch/master/graph/badge.svg)](https://codecov.io/gh/ErhoSen/redis-index)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 ![License](https://img.shields.io/pypi/pyversions/redis-index.svg)
-![PyPI](https://img.shields.io/github/license/erhosen/redis-index.svg)
-](https://pypi.org/project/redis-index/)
+[![PyPI](https://img.shields.io/github/license/erhosen/redis-index.svg)](https://pypi.org/project/redis-index/)
 
 ## Introduction
 
