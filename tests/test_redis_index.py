@@ -74,4 +74,4 @@ def test_warm_filters(redis_connection, statsd_client, db_ids):
 
 
 def test_version():
-    assert __version__ == "0.1.1"
+    assert __version__ == "0.1.2"
