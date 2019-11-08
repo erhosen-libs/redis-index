@@ -1,14 +1,30 @@
 [tool.poetry]
 name = "redis-index"
 version = "0.1.0"
-description = ""
-authors = ["vladimir.vyazovetskov <erhosen@gmail.com>"]
+description = "Inverted Index using efficient Redis set"
+authors = ["Vladimir Vyazovetskov <erhosen@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/ErhoSen/redis-index"
+repository = "https://github.com/ErhoSen/redis-index"
+keywords = ["redis", "index", "gin", "intersection", "filters"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Other Environment",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+include = [
+    "LICENSE",
+]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.6"
 hot_redis = "^0.3.0"
-statsd = "^3.3"
 inflection = "^0.3.1"
+statsd = "^3.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
