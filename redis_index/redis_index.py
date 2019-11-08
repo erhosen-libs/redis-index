@@ -56,7 +56,7 @@ class RedisIndex:
 
     def warm(self, check_consistency: bool = True) -> None:
         # Get fresh db_ids from database
-        db_ids = cast_to_str(self.filter.ids)
+        db_ids = cast_to_str(self.filter.ids[0:-1])
         if not db_ids:
             return
 
