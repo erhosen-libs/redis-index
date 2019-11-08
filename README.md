@@ -115,6 +115,6 @@ for _filter in [RegionFilter("US"), CurrencyFilter("USD")]:
 
 Redis-index optionally supports statsd-integration.
 
-![Redis-Index performance](images/redis_index_performance.png "Redis-Index performance")
+![Redis-Index performance](https://github.com/ErhoSen/redis-index/images/redis_index_performance.png "Redis-Index performance")
 
-![Redis-Index by filters](images/redis_index_by_filters.png "Redis-Index by filters")
+![Redis-Index by filters](https://github.com/ErhoSen/redis-index/images/redis_index_by_filters.png "Redis-Index by filters")
