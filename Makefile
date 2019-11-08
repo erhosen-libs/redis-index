@@ -26,4 +26,4 @@ publish:
 # 2) make bump_version
 # 3) update __version__ var in redis_index/__init__.py and test_version in tests/test_redis_index.py
 # 4) make build
-# 5)
+# 5) make publish

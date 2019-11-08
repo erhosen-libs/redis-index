@@ -127,7 +127,7 @@ Everyone interacting in the project's codebases, issue trackers, chat rooms, and
 
 ## History
 
-### [0.1.0] - 2019-11-08
+### [0.1.11] - 2019-11-08
 
 #### Added
 
