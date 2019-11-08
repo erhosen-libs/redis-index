@@ -21,7 +21,7 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 3
+      max-parallel: 2
       matrix:
         python-version: [3.6, 3.7, 3.8]
     steps:
@@ -38,6 +38,17 @@ jobs:
     - name: Run pytest
       run: |
         poetry run pytest --cov=redis_index --cov-report=xml tests/
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage.xml
+
+  coverage-report:
+    name: test
+    needs: pytest
+    runs-on: ubuntu-latest
+    steps:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1.0.3
       with:
