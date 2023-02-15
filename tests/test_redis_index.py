@@ -1,6 +1,7 @@
 from unittest import mock
 
 import pytest
+
 from redis_index import BaseFilter, RedisFiltering, RedisIndex, __version__
 
 
@@ -74,4 +75,4 @@ def test_warm_filters(redis_connection, statsd_client, db_ids):
 
 
 def test_version():
-    assert __version__ == "0.2.0"
+    assert __version__ == "0.3.0"
