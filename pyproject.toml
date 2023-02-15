@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "redis-index"
-version = "0.4.0"
+version = "0.5.0"
 description = "Inverted Index using efficient Redis set"
 authors = ["Vladimir Vyazovetskov <erhosen@gmail.com>"]
 license = "MIT"
@@ -28,7 +28,7 @@ inflection = "^0.3.1"
 statsd = "^3.3"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
+pytest = "^7.2.0"
 black = {version = "^18.3-alpha.0", allow-prereleases = true}
 ipdb = {version = "^0.12.2", allow-prereleases = true}
 fakeredis = "^1.0"
