@@ -29,7 +29,7 @@ statsd = "^3.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.2.0"
-black = {version = "^18.3-alpha.0", allow-prereleases = true}
+black = {version = "^24.3.0", allow-prereleases = true}
 ipdb = {version = "^0.12.2", allow-prereleases = true}
 fakeredis = "^1.0"
 pytest-cov = "^2.8"
